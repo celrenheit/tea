@@ -22,7 +22,6 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
 
         $rootScope.$on('loggedin', function() {
 
-
             $scope.global = {
                 authenticated: !! $rootScope.user,
                 user: $rootScope.user
