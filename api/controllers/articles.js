@@ -5,6 +5,7 @@
  */
 var mogwai = require('mogwai'),
     Article = mogwai.model('Article'),
+    User = mogwai.model('User'),
     _ = require('lodash');
 
 
@@ -16,7 +17,13 @@ exports.article = function(req, res, next, id) {
         if (err) return next(err);
         if (!article) return next(new Error('Failed to load article ' + id));
         req.article = new Article(article[0]);
-        next();
+        req.article.getCreator(function(err, result) {
+            if(err) return next(err);
+            if(!result) return next(new Error('Failed to load owner of article ' + id));
+            var user = result.results[0];
+            req.article.user = user;
+            next();
+        });
     });
 };
 

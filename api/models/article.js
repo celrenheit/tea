@@ -77,6 +77,15 @@ ArticleSchema.method({
         var query = gremlin.g.v(this._id).in('created');
 
         query.gremlin.exec(callback);
+    },
+
+    getCreator: function(callback) {
+        var grex = this.connection.client;
+        var gremlin = grex.gremlin();
+
+        var query = gremlin.g.v(this._id).in('created');
+
+        query.gremlin.exec(callback);
     }
 
 });
