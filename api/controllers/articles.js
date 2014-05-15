@@ -31,7 +31,7 @@ exports.article = function(req, res, next, id) {
  * Create an article
  */
 exports.create = function(req, res) {
-    var article = new Article();
+    var article = new Article(req.body);
 
     for(var attribute in req.body) {
         article[attribute] = req.body[attribute];
@@ -114,6 +114,5 @@ exports.show = function(req, res) {
 exports.all = function(req, res) {
     Article.all(function(err, results) {
         res.jsonp(results.results);
-
     });
 };

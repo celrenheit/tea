@@ -33,7 +33,7 @@ var ArticleSchema = new Schema({
 ArticleSchema.statics.all = function(cb) {
     var grex = mogwai.connection.client;
 
-    var query = grex.gremlin().g.V('$type', 'article');
+    var query = grex.gremlin().g.V('$type', 'article').transform("{m=it.map(); m._id=it.id; m.user=it.in('created').map.first(); m}");
 
     query.gremlin.exec(cb);
 };

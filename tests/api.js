@@ -40,7 +40,7 @@ describe('Articles', function() {
 	it('should get all published articles', function(done) {
 		agent
 		.get(BASE_URL + '/articles')
-		.end(function(res) {
+		.end(function(res) {console.log(res.body);
 			res.status.should.equal(200);
 			done();
 		});
@@ -56,7 +56,7 @@ describe('Articles', function() {
 		.post(BASE_URL + '/articles')
 		.send(postData)
 		.end(function(res) {
-			res.should.have.status(200);
+			res.status.should.equal(200);
 			post = res.body;
 			done();
 		});
